@@ -1,0 +1,117 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Racionales</title>
+<script>
+function fractio(){
+
+	var racional = document.enter.rational.value;
+	var parte_fraccionaria = 1;
+	var parte_entera;
+	var contador=0;
+	
+	var punto = racional.indexOf(".");
+	if(punto==-1){
+		return;
+	}
+	var entera = racional.substr(0,punto)
+	var fraccionaria = racional.substr(punto+1);
+	var contador = fraccionaria.length;
+	var racional = parseInt(entera + fraccionaria);
+	
+	var contador = Math.pow(10,contador);
+
+	var cociente;
+	var residuo;
+	var arreglo = new Array();
+	var a=0;
+	
+	document.enter.resultado.value = "[";
+
+	while(contador > 0){
+		cociente = racional / contador;
+		cociente = Math.floor(cociente);	
+		residuo = racional % contador;	
+		racional = contador;
+		contador = residuo;
+	
+		if(contador > 0){
+			document.enter.resultado.value += cociente + ", ";
+			arreglo[a] = cociente;
+			//alert(arreglo[a]);
+			a++;
+		}
+		
+		else{
+			document.enter.resultado.value += cociente;
+			arreglo[a] = cociente;
+		}
+
+	}
+	document.enter.resultado.value += "]";
+	
+	document.enter.fraccion.value = "";
+	document.enter.valor.value = "";
+	
+	var b=1;
+	
+	while (b < arreglo.length) {
+	
+		var max = arreglo.length - b;
+		var temp_1 = 1;
+		var temp_2 = arreglo[max];
+		var deno; var nume;
+		var max_1 = max - 1;
+		var max_2 = max - 2;
+
+		while(max > 0){
+			temp_1 = temp_2 * arreglo[max-1] + temp_1;
+				if(max-1==0){
+					nume = temp_1;
+					deno = temp_2;
+					break;
+				}
+			temp_2 = temp_1 * arreglo[max-2] + temp_2;
+				if(max-2==0){
+					nume = temp_2;
+					deno = temp_1;
+					break;
+				}
+			max -= 2;
+		}
+		
+		var raya = " / ";
+		if(nume==undefined){
+			document.enter.fraccion.value = "";
+		}
+		else{
+			vida = nume / deno;		
+			document.enter.valor.value += vida + "\n";
+			document.enter.fraccion.value += nume + raya + deno + "\n";
+		}
+		b++;
+	}
+}
+</script>
+</head>
+
+<body>
+
+<form name="enter" onSubmit="fractio();return false">
+<input type="text" name="rational" size="40">
+<input type="submit" value="Entrar" name="someter"><br>
+<input type="text" name="resultado" size="80">
+<textarea name="fraccion" cols="40" rows="20"></textarea>
+<textarea name="valor" cols="40" rows="20"></textarea>
+<br><input type="reset" value="Borrar">
+</form>
+
+
+
+
+</body>
+
+</html>

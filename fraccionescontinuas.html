@@ -1,0 +1,103 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>CONVERTIDOR DE FRACCIONES SIMPLES A FRACCIONES CONTINUAS</title>
+<script>
+<!--
+function division()
+{
+	var dividendo = document.entradas.numerador.value;
+	var divisor = document.entradas.denominador.value;
+	var cociente;
+	var residuo;
+	document.entradas.resultado.value = "[";
+	
+	while(divisor > 0){
+
+		cociente = dividendo / divisor;	
+		cociente = Math.floor(cociente);	
+		residuo = dividendo % divisor;	
+		dividendo = divisor;
+		divisor = residuo; 
+		
+		if(divisor > 0 && cociente < 1000000){
+			document.entradas.resultado.value += cociente + ", ";
+		}
+		if(divisor > 0 && cociente > 1000000){
+			alert("¡La exactitud de este resultado es demasiado baja!");
+		}
+		else{
+			document.entradas.resultado.value += cociente;
+		}
+	}
+	
+	document.entradas.resultado.value += "]";
+	
+	
+}
+//-->
+</script>
+<script>
+ <!--
+function copiar(){
+
+	var numer = document.entradas.numerador.value;
+	var denom = document.entradas.denominador.value;
+	var resul = document.entradas.resultado.value;
+	var igual = " = ";
+	var igual = igual.fontcolor('red');
+	var raya  = " / ";
+	var raya  = raya.fontcolor('red');
+	var cadena = numer + raya + denom + igual + resul;
+	
+	if(numer=="" || denom=="" || resul==""){
+		alert("¡No ha hecho nada!");
+	}
+	else{
+	top.notas.document.writeln(cadena + "<br>");
+	}
+}
+//-->
+</script>
+ 
+<base target="notas al pie">
+</head>
+
+<body bgcolor="#CCCCCC" vlink="#0000FF" alink="#FF0000">
+<p align="center"><font face="HoratioDMed">
+<font size=+2>Convertidor de fracciones simples a fracciones continuas</font>
+ </font></p>
+<center>
+<img src="fraccionescontinuas_archivos/image002.gif" width="131" height="63"> 
+<p align="center"></p>
+<form name="entradas" onSubmit="division();return false">
+<p align="center">
+<span lang="es-co"><i><font face="Times New Roman">h</font></i><font face="Technical"><b><i> 
+=&nbsp; </i></b></font></span><input type="text" name="numerador" size="14">
+<span lang="es-co">&nbsp;&nbsp;&nbsp;&nbsp; <i><font face="Times New Roman">k
+</font><font face="Technical">=</font><font face="Times New Roman"> <b>&nbsp;</b></font></i></span><input type="text" name="denominador" size="14"><span lang="es-co">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><br><br>
+<input type="submit" value="Expandir" name="boton"><br><br>
+<span lang="es-co"><font face="Technical">[</font><font face="Times New Roman"><i>a<sub>0</sub>,<sub>&nbsp;
+</sub>a<sub>1</sub>,<sub> </sub>... , a<sub>n</sub></i>]&nbsp; </font>
+<font face="Technical">=</font><font face="Times New Roman"><i> </i></font><sub>
+<font face="Technical">&nbsp;</font></sub></span><input type="text" name="resultado" size="60"><span lang="es-co"><font face="Technical" size="2">&nbsp;&nbsp;
+</font><br>
+
+<a href="#" onClick="copiar();return false;">
+<font size="2" face="Times New Roman">Copiar resultado</font></a></span>
+&nbsp; &nbsp; / &nbsp; &nbsp;
+<a href=javascript:history.back(-1)>
+<font size="2" face="Times New Roman">Borrar anotaciones</font></a><br>
+<br>
+<input type="reset" value="Borrar">
+
+</form>
+
+</body>
+
+</html>

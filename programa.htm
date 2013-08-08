@@ -1,0 +1,244 @@
+<html>
+<head>
+<title>Programa</title>
+<script>
+<!--
+function sumar(){
+	
+// Obtiene los datos ingresados por el usuario
+	var dato = new Array();
+		dato[0] = document.forma.d0.value;
+		dato[1] = document.forma.d1.value;
+		dato[2] = document.forma.d2.value;
+		dato[3] = document.forma.d3.value;
+		dato[4] = document.forma.d4.value;
+		dato[5] = document.forma.d5.value;
+		dato[6] = document.forma.d6.value;
+		dato[7] = document.forma.d7.value;
+		dato[8] = document.forma.d8.value;
+		dato[9] = document.forma.d9.value;
+		dato[10] = document.forma.d10.value;
+		dato[11] = document.forma.d11.value;
+		dato[12] = document.forma.d12.value;
+		dato[13] = document.forma.d13.value;
+		dato[14] = document.forma.d14.value;
+		dato[15] = document.forma.d15.value;
+		dato[16] = document.forma.d16.value;
+		dato[17] = document.forma.d17.value;
+		dato[18] = document.forma.d18.value;
+		dato[19] = document.forma.d19.value;
+		dato[20] = document.forma.d20.value;
+		dato[21] = document.forma.d21.value;
+		dato[22] = document.forma.d22.value;
+		dato[23] = document.forma.d23.value;
+
+
+	var buscado = parseFloat(document.forma.buscado.value);
+
+// Valida los datos
+
+	var sumadetodo = 0;
+
+	for(var i = 0; i < dato.length; i++){
+		dato[i] = parseFloat(dato[i]);
+		if(isNaN(dato[i]) == true || dato[i] > buscado){
+			dato[i] = 0;
+		}
+		sumadetodo += dato[i];
+	}
+	
+	if(sumadetodo == 0){
+		alert("Lo que buscas es imposible de encontrar");
+		return 0;
+	}
+	
+	if(isNaN(buscado) == true){
+		alert("¡Debes buscar algún numéro!");
+		return 0;
+	}	
+	if(sumadetodo < buscado){
+		document.forma.resultado.value += "¡No hay ninguna suma posible!";
+		return;
+	}
+
+//Organiza el arreglo de datos
+
+	var i = 0;
+	while(i < dato.length){
+		if(dato[i] == 0 && dato.length > 0){
+			for(var j = i; j < dato.length - 1; j++){
+				dato[j] = dato[j + 1];
+			}
+			dato.length--;
+		}
+		else{
+			i++;
+		}
+	}
+	
+//Inicializa arreglo de indices y variable para contar las posibilidades
+	
+	var indices = new Array("0");
+	var cuenta = 0;
+	var loops = 0;
+	var a = 1;
+	
+	while(indices[0] != dato.length - 1){
+		
+		if(document.forma.preguntar.checked == true && dato.length > 11){
+			loops++;
+			var b = 10000;
+			if(loops%(b*a) == 0){
+			var respuesta = confirm("Se han intentado " + b*a + " combinaciones y se han encontrado "	
+			+ cuenta + " posibilidades. ¿Deseas seguir buscando?", "Si");
+			a++;
+			}
+			if(respuesta == false){
+				return;
+			}
+		}
+		
+// Hace la suma según el array de indices		
+		var suma = 0;
+				
+		for(var i = 0; i < indices.length; i++){
+			indices[i] = parseFloat(indices[i]);
+			suma += dato[indices[i]];
+		}
+
+// Imprime si encuentra una coincidencia
+		if(suma == buscado){
+			cuenta++;
+			document.forma.resultado.value += "\nSuma " + cuenta + ": \n";
+			
+			for(var i = 0; i < indices.length; i++){
+				document.forma.resultado.value += dato[indices[i]];
+				
+				if(i != indices.length - 1){
+					document.forma.resultado.value += " + ";
+				}
+				else{
+					document.forma.resultado.value += "\n";
+				}
+			}
+		}
+		
+// Modifica el arreglo de indices
+		
+		if(suma < buscado){
+			if(indices[indices.length - 1] != dato.length - 1){
+				indices[indices.length] = indices[indices.length - 1] + 1;
+			}
+			else{
+				indices.length -= 1;
+				indices[indices.length - 1] += 1;
+			}
+		}
+		else if(suma >= buscado){
+			if(indices[indices.length - 1] != dato.length -1){
+				indices[indices.length - 1] += 1;
+			}
+			else{
+				indices.length -= 1;
+				indices[indices.length - 1] += 1;
+			}
+		}
+		
+	}
+	if(dato[indices[0]] == buscado){
+		document.forma.resultado.value += "Suma " + eval(cuenta + 1) + ": \n" + buscado;
+	}
+	
+	if(cuenta == 0 && dato.length != 1){
+		document.forma.resultado.value += "¡No hay ninguna suma posible!";
+	}
+	else if(cuenta == 0 && indices[0] == dato.length - 1){
+		document.forma.resultado.value += "\nSuma: \n" + dato[0];
+	}
+}
+
+-->
+</script>
+
+</head>
+
+<body BGCOLOR="#FFFFCC">
+	<center>
+	<font size = 5 style="font-family: Verdana; color: #FF33CC">
+	Buscador de Sumas
+	</font>
+	</center><hr color="#CC00CC">
+	
+	<table width = 100%>
+		<form name="forma" onSubmit="sumar(); return false">
+		<tr>
+			<td>
+				<font style="font-family: Times New Roman; color: #3333FF">
+				Ingrese los datos entre los cuales desea hallar la suma:</font><br>
+			</td>
+			<td>
+			<font style="font-family: Times New Roman; color: #3333FF">
+				Las sumas halladas se listan a continuación:</font><br>
+			</td>				
+		<tr>
+			<td align=left WIDTH=50% CELLPADDING=10>
+			<table BGCOLOR="#33CCFF" CELLPADDING="10">
+				<tr>
+					<td>
+						1:&nbsp;&nbsp; <input type=text name="d0" size=10><br>
+						2:&nbsp;&nbsp; <input type=text name="d1" size=10><br>
+						3:&nbsp;&nbsp; <input type=text name="d2" size=10><br>
+						4:&nbsp;&nbsp; <input type=text name="d3" size=10><br>
+						5:&nbsp;&nbsp; <input type=text name="d4" size=10><br>
+						6:&nbsp;&nbsp; <input type=text name="d5" size=10><br>
+						7:&nbsp;&nbsp; <input type=text name="d6" size=10><br>
+						8:&nbsp;&nbsp; <input type=text name="d7" size=10><br>
+					</td>
+					<td>
+						9:&nbsp;&nbsp;&nbsp;&nbsp; <input type=text name="d8" size=10><br>
+						10:&nbsp;&nbsp; <input type=text name="d9" size=10><br>
+						11:&nbsp;&nbsp; <input type=text name="d10" size=10><br>
+						12:&nbsp;&nbsp; <input type=text name="d11" size=10><br>
+						13:&nbsp;&nbsp; <input type=text name="d12" size=10><br>
+						14:&nbsp;&nbsp; <input type=text name="d13" size=10><br>
+						15:&nbsp;&nbsp; <input type=text name="d14" size=10><br>
+						16:&nbsp;&nbsp; <input type=text name="d15" size=10><br>
+					</td>
+					<td>
+						17:&nbsp;&nbsp; <input type=text name="d16" size=10><br>
+						18:&nbsp;&nbsp; <input type=text name="d17" size=10><br>
+						19:&nbsp;&nbsp; <input type=text name="d18" size=10><br>
+						20:&nbsp;&nbsp; <input type=text name="d19" size=10><br>
+						21:&nbsp;&nbsp; <input type=text name="d20" size=10><br>
+						22:&nbsp;&nbsp; <input type=text name="d21" size=10><br>
+						23:&nbsp;&nbsp; <input type=text name="d22" size=10><br>
+						24:&nbsp;&nbsp; <input type=text name="d23" size=10><br>
+					</td>
+				</tr>
+			</table>
+			</td>
+			<td valign=top >
+						<textarea name="resultado" cols=40 rows=13></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align=LEFT>
+				<BR><font style="font-family: Times New Roman; color: #3333FF">
+				Escriba el valor que desea buscar:</font>
+				<input type=text name="buscado" size=20>
+				<br>
+				<input type=checkbox name="preguntar" value="Hi" checked > 
+				<font size=-1><i>Preguntarme si quiero continuar buscando.
+				</i></font>
+			</td>
+			<td>
+				<input type=submit value="Buscar este valor">&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;<input type=reset value="Borrar los datos">
+				<br><br>
+			</td>
+		</tr>
+	</form>
+</table>
+<hr color="#CC00CC">
+</body>
+</html>
